@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+      <link
+        rel="icon"
+        type="image/png"
+        href="https://media-hosting.imagekit.io/371535f1494a47ef/logo.png?Expires=1841366613&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=fYCVc9eRQXq8OGJIHDpVYR-mtofUoQuc7K~nSmUQqw0shtg2Ubvu~G3CIUz5K9MQwY1lPRXOZl6QmIkEbz3PTEVlfuMqxlZFq3xRHe~LuBZFoxbftkn6B54HDPhCNetPfbh9f6IidhkYPOrE7xFtyn5Je0e89GhmlM4MVxO8RcbI8Wl726ivMk20TW3ZxPHJfdqXbW4kIjp8Bg38LswIS2rhSiPlSOTrQO6Q67cAWqgvFu7cqPc3eYxzZmKAxABuo8XKDfjYLpqeBmwWUNjJqkqSD68xCygsdqySRA5zjGJH~0i3RXvW2I9oGL8-ZNDBaz1DyOB4wUiTfc~QtNq1aw__"
+      />
+      <title>Área de Clientes - Baixar Fotos</title>
+    </head>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-image: url("https://media-hosting.imagekit.io/07adcd27f8e94542/786876.jpg?Expires=1841686599&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=MnoPIE~U8MM9JrYnfqJ-WS1my-0buC-X-j3xwWKs-Yf7caQYqopeneuQA7eX-BcPyLA-Hgd-hWz8U1c8H0KtCX2LeWd~EZSjTR37VpPUC2W2STWkG4LOK-LYT1uRMi5unr5iDgPbzR6a8zwiZI-SgKOVMVQMVuIiQFik76EpQLBNke~5hMerx3kapk7bZVksLZ~ytKByCPHvBU79MlQBiWh5DfFN4nDwezh6menlZ0ILxEcNpyG1b2iGS1CGmk7ioCccSeWU19sDPSB8m2yJiykaCNhzgTDjNTumUq-trNAqbnTTHtznGBh~7IP~1lkuvClsG0GcUs9nnpb5W2Oywg__");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+    
+
+    h1 {
+      text-align: center;
+      color: #00bcd4;
+      margin-bottom: 30px;
+    }
+
+    .search-bar {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .search-bar input,
+    .search-bar select {
+      flex: 1;
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1000px; /* controla a largura total dos blocos */
+  margin: 0 auto; /* centraliza a galeria inteira na tela */
+}
+
+.photo {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid #00bcd4;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 188, 212, 0.3);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 300px; /* define largura fixa para manter 3 por linha */
+}
+
+.photo:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 188, 212, 0.5);
+}
+
+.photo img {
+  width: 100%;
+  border-radius: 8px;
+  border: 2px solid #e63946;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+
+    .photo p {
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .photo a,
+.photo button {
+  display: inline-block;
+  padding: 8px 15px;
+  background: #e63946; /* vermelho */
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  margin: 5px 0;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.photo a:hover,
+.photo button:hover {
+  background: #c62828; /* vermelho mais escuro */
+  transform: scale(1.05); /* pequeno aumento no hover */
+}
+
+
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 40px;
+      color: #00bcd4;
+      text-decoration: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #albumFotos {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+h1.faixa {
+    background-image: url('https://media-hosting.imagekit.io/0469969ca01742cd/image-removebg-preview%20(1).png?Expires=1841610041&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=uxH5Bws2Kg8qsbQ3ukgqWgXO4ZJNZPXImkfm6qwyZWsB517DWR5EQNXGb2LbGn0DEWc4HYPemrqnAVneaZo2GHauVXJSJv-lIBpoF9Kt6me9~NOKvt9QAa5ToSgDsurRNw6LM1N9WRFUWjkpZkgF3DikHYVugv2MwcyrgIqvQwgxxFAf4IHYpJlxKE-ij10RnCqdsD2qKe5y1RIxjqek3nymSGjJe74Q6LoLQ8IB~eWIDnkFPKGnJyZOXErh3Qi-Oj7F~Xvgu7SuErmWPIj7EQG9ZqL9yw02xW-Hl4r1nEOGOgbzy9qID8BBZMxyYeko4ohpAu-FpJbTWa0sGAbmSA__'); /* Caminho da sua imagem */
+    background-size: cover;      /* Faz a imagem cobrir toda a área */
+    background-position: center; /* Centraliza a imagem */
+    color: #5e3535;                 /* Cor do texto */
+    padding: 200px 30px;          /* Espaçamento dentro da faixa */
+    text-align: center;          /* Alinha o texto ao centro */
+    font-size: 2em;              /* Tamanho da fonte */
+    border-radius: 6px;          /* Bordas arredondadas */
+    width: 100%;                 /* Largura da faixa ocupa toda a tela */
+    margin: 20px 0;              /* Espaçamento superior e inferior */
+    box-sizing: border-box;     /* Garante que o padding não afete a largura total */
+}
+
+@media (max-width: 768px) {
+    h1.faixa {
+        font-size: 1.5em;         /* Ajusta o tamanho da fonte para telas menores */
+        padding: 30px 10px;       /* Ajusta o padding para telas menores */
+    }
+}
+
+
+    
+  </style>
+</head>
+<body>
+
+
+<style>
+.search-bar input[type="text"],
+.search-bar select {
+  border: 2px solid red;
+  background-color: #ffe5e5; /* tom claro de vermelho */
+  color: #a10000; /* texto em tom escuro de vermelho */
+  padding: 8px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+</style>
+
+
+  <h1 class="faixa">Área de Clientes - Baixe suas Fotos</h1>
+
+
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Buscar por nome ou evento...">
+    <select id="filtro">
+      <option value="">Todos os tipos</option>
+      <option value="animeking">animeking</option>
+      <option value="ensaio">Ensaio</option>
+      <option value="GGXP">GGXP</option>
+      
+    </select>
+  </div>
+
+  <div class="gallery" id="galeria"></div>
+
+  <div class="gallery hidden" id="albumFotos"></div>
+  <div style="text-align:center; margin-top:20px;">
+    <button id="voltarBtn" class="hidden" onclick="voltarGaleria()">← Voltar para galeria</button>
+  </div>
+
+  <style>
+  .back-link-container {
+    text-align: center;
+    margin-top: 50px; /* opcional, para dar um espaçamento */
+  }
+
+  .back-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e63946; /* Vermelho */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  .back-link:hover {
+    background-color: #c62828; /* Vermelho mais escuro no hover */
+    transform: scale(1.05); /* Efeito de leve aumento */
+  }
+</style>
+</head>
+<body>
+
+<div class="back-link-container">
+  <a href="index.html" class="back-link">← Voltar ao site principal</a>
+</div>
+
+</body>
+
+
+  <script>
+    const fotos = [
+  { nome: "Mary 2B cosplay", arquivo: "fotos/Mary-2B-cosplay.jpg", tipo: "ensaio", ehAlbum: false },
+  { nome: "Gracielle", arquivo: "fotos/Gracielle.jpg", tipo: "ensaio", ehAlbum: false },
+  { nome: "may", arquivo: "fotos/may.jpg", tipo: "ensaio", ehAlbum: false },
+  { nome: "nanda", arquivo: "fotos/nanda.jpg", tipo: "ensaio", ehAlbum: false },
+  { nome: ".", arquivo: "fotos/..jpg", tipo: "ensaio", ehAlbum: false },
+  { nome: "Casamento Pedr", arquivo: "fotos/casamento-pedro.jpg", tipo: "casamento", ehAlbum: false },
+  {
+    nome: "Mary-rem", tipo: "ensaio", ehAlbum: true,
+    capa: "fotos/Mary-rem/Mary-rem.jpg",
+    imagens: [
+      "fotos/Mary-rem/1.jpg",
+      "fotos/Mary-rem/2.jpg",
+      "fotos/Mary-rem/3.jpg",
+      "fotos/Mary-rem/4.jpg",
+      "fotos/Mary-rem/5.jpg",
+      "fotos/Mary-rem/6.jpg",
+      "fotos/Mary-rem/7.jpg",
+      "fotos/Mary-rem/8.jpg",
+      "fotos/Mary-rem/9.jpg",
+      "fotos/Mary-rem/10.jpg",
+      "fotos/Mary-rem/11.jpg",
+      "fotos/Mary-rem/12.jpg",
+      "fotos/Mary-rem/13.jpg",
+      "fotos/Mary-rem/14.jpg",
+      "fotos/Mary-rem/16.jpg",
+      "fotos/Mary-rem/17.jpg",
+      "fotos/Mary-rem/18.jpg",
+      "fotos/Mary-rem/19.jpg",
+      "fotos/Mary-rem/20.jpg",
+
+    ]
+  },
+  {
+    nome: "Ensaio Mar", tipo: "ensaio", ehAlbum: true,
+    capa: "fotos/album-mari/capa.jpg",
+    imagens: [
+      "fotos/album-mari/1.jpg",
+      "fotos/album-mari/2.jpg",
+      "fotos/album-mari/3.jpg"
+    ]
+  },
+  {
+    nome: "Ensaio Mari", tipo: "ensaio", ehAlbum: true,
+    capa: "fotos/album-mari/capa.jpg",
+    imagens: [
+      "fotos/album-mari/1.jpg",
+      "fotos/album-mari/2.jpg",
+      "fotos/album-mari/3.jpg"
+    ]
+  },
+  {
+    nome: "Ensaio Mar", tipo: "ensaio", ehAlbum: true,
+    capa: "fotos/album-mari/capa.jpg",
+    imagens: [
+      "fotos/album-mari/1.jpg",
+      "fotos/album-mari/2.jpg",
+      "fotos/album-mari/3.jpg",
+      "fotos/album-mari/4.jpg"
+    ]
+  }
+];
+
+;
+
+
+    const galeria = document.getElementById('galeria');
+    const albumFotos = document.getElementById('albumFotos');
+    const voltarBtn = document.getElementById('voltarBtn');
+    const searchInput = document.getElementById('search');
+    const filtroSelect = document.getElementById('filtro');
+
+    function exibirFotos() {
+      const termo = searchInput.value.toLowerCase();
+      const tipoSelecionado = filtroSelect.value;
+
+      galeria.classList.remove('hidden');
+      albumFotos.classList.add('hidden');
+      voltarBtn.classList.add('hidden');
+
+      const resultados = fotos.filter(f =>
+        f.nome.toLowerCase().includes(termo) &&
+        (tipoSelecionado === "" || f.tipo === tipoSelecionado)
+      );
+
+      galeria.innerHTML = resultados.length
+  ? resultados.map(foto => {
+      if (!foto.ehAlbum) {
+        return `
+          <div class="photo">
+            <img src="${foto.arquivo}" alt="${foto.nome}">
+            <p>${foto.nome}</p>
+            <a href="${foto.arquivo}" download="${foto.nome}.jpg">Baixar</a>
+          </div>
+        `;
+      } else {
+        return `
+          <div class="photo">
+            <img src="${foto.capa}" alt="${foto.nome}">
+            <p>Álbum: ${foto.nome}</p>
+            <button onclick="abrirAlbum('${foto.nome}')">Ver Álbum</button>
+          </div>
+        `;
+      }
+    }).join("")
+  : "<p style='text-align:center'>Nenhuma foto encontrada.</p>";
+
+    }
+
+    function abrirAlbum(nomeAlbum) {
+      const album = fotos.find(f => f.ehAlbum && f.nome === nomeAlbum);
+      if (!album) return;
+
+      galeria.classList.add('hidden');
+      albumFotos.classList.remove('hidden');
+      voltarBtn.classList.remove('hidden');
+
+      albumFotos.innerHTML = album.imagens.map(img => `
+        <div class="photo">
+          <img src="${img}" alt="${album.nome}">
+          <a href="${img}" download>Baixar</a>
+        </div>
+      `).join("");
+    }
+
+    function voltarGaleria() {
+      exibirFotos();
+    }
+
+    searchInput.addEventListener('input', exibirFotos);
+    filtroSelect.addEventListener('change', exibirFotos);
+    window.onload = exibirFotos;
+  </script>
+
+<!-- Botões de Redes Sociais -->
+<div style="margin-top: 20px;">
+  <!-- Botão Instagram -->
+  <a href="https://www.instagram.com/paulo_fotografo28/" target="_blank" style="text-decoration: none;">
+    <button style="background-color: #E1306C; color: white; border: none; padding: 10px 20px; border-radius: 10px; margin-right: 10px; font-weight: bold; cursor: pointer;">
+      📸 Instagram
+    </button>
+  </a>
+
+  <!-- Botão WhatsApp -->
+  <a href="https://wa.me/5538991034781" target="_blank" style="text-decoration: none;">
+    <button style="background-color: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; cursor: pointer;">
+      💬 WhatsApp
+    </button>
+  </a>
+</div>
+
+<script>
+function iniciarJogoFotografia() {
+  document.body.innerHTML = `
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: 'Courier New', monospace;
+        background: linear-gradient(to top, #8fd19e 0%, #87ceeb 50%);
+        position: relative;
+        cursor: none;
+      }
+
+      .nuvem {
+        position: absolute;
+        width: 120px;
+        height: 60px;
+        background: #fff;
+        border-radius: 60px;
+        top: 50px;
+        left: 100px;
+        box-shadow: 40px 0 #fff, 80px 0 #fff;
+        opacity: 0.8;
+        animation: moverNuvem 60s linear infinite;
+      }
+
+      @keyframes moverNuvem {
+        0% { left: -200px; }
+        100% { left: 110%; }
+      }
+
+      .grama {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(to top, #2f8f46 0%, #48b56a 100%);
+        border-top-left-radius: 100% 20%;
+        border-top-right-radius: 100% 20%;
+      }
+
+      .passaro {
+        position: absolute;
+        width: 40px;
+        height: 20px;
+        background: none;
+        animation: baterAsas 1s infinite alternate;
+      }
+
+      .passaro::before {
+        content: '';
+        position: absolute;
+        width: 40px;
+        height: 20px;
+        background: radial-gradient(ellipse at center, #444 40%, transparent 60%);
+        border-radius: 50% 50% 50% 50%;
+      }
+
+      @keyframes baterAsas {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-10px); }
+      }
+
+      #pontuacao {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(255,255,255,0.9);
+        padding: 10px 15px;
+        border-radius: 10px;
+        font-size: 16px;
+        z-index: 10;
+        color: black;
+        font-weight: bold;
+      }
+
+      #camera {
+        position: fixed;
+        width: 60px;
+        height: 40px;
+        background: #333;
+        border: 3px solid #000;
+        border-radius: 4px;
+        pointer-events: none;
+        z-index: 1000;
+      }
+
+      #camera::before {
+        content: '';
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        width: 20px;
+        height: 20px;
+        background: #111;
+        border-radius: 50%;
+        border: 2px solid #aaa;
+      }
+
+      #flash {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: white;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 999;
+        transition: opacity 0.2s;
+      }
+    </style>
+
+    <div id="pontuacao">📸 Fotos tiradas: <span id="pontos">0</span></div>
+    <div class="nuvem" style="top:40px;"></div>
+    <div class="nuvem" style="top:100px; left:300px; animation-delay:10s;"></div>
+    <div class="nuvem" style="top:70px; left:600px; animation-delay:20s;"></div>
+    <div class="grama"></div>
+    <div id="camera"></div>
+    <div id="flash"></div>
+  `;
+
+  const flash = document.getElementById("flash");
+  const camera = document.getElementById("camera");
+  let pontos = 0;
+
+  document.addEventListener("mousemove", (e) => {
+    camera.style.left = `${e.clientX - 30}px`;
+    camera.style.top = `${e.clientY - 20}px`;
+  });
+
+  function mostrarFlash() {
+    flash.style.opacity = 1;
+    setTimeout(() => flash.style.opacity = 0, 100);
+  }
+
+  function atualizarPontuacao() {
+    document.getElementById("pontos").innerText = pontos;
+  }
+
+  function criarPassaro() {
+    const passaro = document.createElement("div");
+    passaro.className = "passaro";
+    document.body.appendChild(passaro);
+
+    let x = -50;
+    const y = Math.random() * (window.innerHeight - 250) + 50;
+    passaro.style.top = `${y}px`;
+    passaro.style.left = `${x}px`;
+
+    const mover = setInterval(() => {
+      x += 2 + pontos * 0.1;
+      if (x > window.innerWidth + 50) {
+        clearInterval(mover);
+        passaro.remove();
+      } else {
+        passaro.style.left = `${x}px`;
+      }
+    }, 20);
+
+    passaro.addEventListener("click", (e) => {
+      e.stopPropagation();
+      pontos++;
+      atualizarPontuacao();
+      mostrarFlash();
+      passaro.remove();
+      clearInterval(mover);
+    });
+  }
+
+  setInterval(criarPassaro, 1500);
+
+  atualizarPontuacao();
+}
+
+window.addEventListener('offline', () => {
+  iniciarJogoFotografia();
+});
+</script>
+
+
+
+</body>
+</html>
