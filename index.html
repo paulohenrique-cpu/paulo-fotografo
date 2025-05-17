@@ -602,31 +602,40 @@ body {
 </script>
 
 
-      </div>
-      <style>
-    .btn-downloads {
-      display: inline-block;
-      padding: 12px 24px;
-      background-color: #e63946; /* Vermelho bonito */
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 8px;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+     </div>
+<style>
+  .btn-downloads {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #e63946; /* Vermelho bonito */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 
-    .btn-downloads:hover {
-      background-color: #d62828; /* Vermelho mais escuro no hover */
-      transform: scale(1.05);
-    }
-  </style>
+  .btn-downloads:hover {
+    background-color: #d62828; /* Vermelho mais escuro no hover */
+    transform: scale(1.05);
+  }
+
+  .centralizar-botao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh; /* Centraliza verticalmente ocupando 100% da altura da tela */
+  }
+</style>
 </head>
 
 <body>
-  <a class="btn-downloads" href="downloads.html">📸 Acessar Fotos dos Eventos</a>
+  <div class="centralizar-botao">
+    <a class="btn-downloads" href="downloads.html">📸 Acessar Fotos dos Eventos</a>
+  </div>
 </body>
-    >
+
     </section>
 
 
@@ -714,8 +723,57 @@ body {
       </p>
     </section>
     
+    <!-- Botões de Redes Sociais com Fundo Transparente e Efeito -->
+<div class="social-buttons">
+  <a href="https://www.instagram.com/paulo_fotografo28/" target="_blank" class="social-icon instagram" title="Instagram"></a>
+  <a href="https://wa.me/5538991034781" target="_blank" class="social-icon whatsapp" title="WhatsApp"></a>
+  <a href="https://www.facebook.com/profile.php?id=61561469927137&sk=photos" target="_blank" class="social-icon facebook" title="Facebook"></a>
+</div>
 
-    <footer>&copy; 2025 Paulo henrique | fotógrafo</footer>
+<style>
+  .social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+
+  .social-icon {
+    width: 80px;
+    height: 80px;
+    background-color: transparent;
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 2px solid white;
+    border-radius: 16px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+  }
+
+  .social-icon:hover {
+    transform: scale(0.85) rotate(-10deg);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  }
+
+  .instagram {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/174/174855.png');
+  }
+
+  .whatsapp {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/733/733585.png');
+  }
+
+  .facebook {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/733/733547.png');
+  }
+</style>
+
+
+    <footer>&copy; 2025 Paulo henrique | fotógrafo
+      
+    </footer>
 
 <script>
 function iniciarJogoFotografia() {
