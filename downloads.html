@@ -230,139 +230,67 @@ h1.faixa {
 </body>
 
 
-  <script>
-    const fotos = [
+  const fotos = [
   { nome: "Mary 2B cosplay", arquivo: "fotos/Mary-2B-cosplay.jpg", tipo: "ensaio", ehAlbum: false },
   { nome: "Gracielle", arquivo: "fotos/Gracielle.jpg", tipo: "ensaio", ehAlbum: false },
   { nome: "may", arquivo: "fotos/may.jpg", tipo: "ensaio", ehAlbum: false },
   { nome: "nanda", arquivo: "fotos/nanda.jpg", tipo: "ensaio", ehAlbum: false },
   { nome: ".", arquivo: "fotos/3.jpg", tipo: "ensaio", ehAlbum: false },
   { nome: "Mary rem", arquivo: "fotos/mary-rem.jpg", tipo: "ensaio", ehAlbum: false },
+
   {
     nome: "Mary-rem", tipo: "ensaio", ehAlbum: true,
     capa: "Mary-rem/Mary-rem.jpg",
     imagens: [
-      
-      "Mary-rem/2.jpg",
-      "Mary-rem/3.jpg",
-      "Mary-rem/4.jpg",
-      "Mary-rem/5.jpg",
-      "Mary-rem/6.jpg",
-      "Mary-rem/7.jpg",
-      "Mary-rem/8.jpg",
-      "Mary-rem/9.jpg",
-      "Mary-rem/10.jpg",
-      "Mary-rem/11.jpg",
-      "Mary-rem/12.jpg",
-      "Mary-rem/13.jpg",
-      "Mary-rem/14.jpg",
-      "Mary-rem/16.jpg",
-      "Mary-rem/17.jpg",
-      "Mary-rem/18.jpg",
-      "Mary-rem/19.jpg",
-      "Mary-rem/20.jpg",
-      "Mary-rem/21.jpg",
-      "Mary-rem/22.jpg",
-      "Mary-rem/23.jpg",
-      "Mary-rem/24.jpg",
-      "Mary-rem/25.jpg",
-      "Mary-rem/21.jpg",
-      "Mary-rem/22.jpg",
-      "Mary-rem/23.jpg",
-      "Mary-rem/24.jpg",
-      "Mary-rem/25.jpg",
-      "Mary-rem/26.jpg",
-      "Mary-rem/27.jpg",
-      "Mary-rem/28.jpg",
-      "Mary-rem/29.jpg",
-      "Mary-rem/30.jpg",
-      "Mary-rem/31.jpg",
-      "Mary-rem/32.jpg",
-      
-      "Mary-rem/34.jpg",
-
+      "Mary-rem/2.jpg", "Mary-rem/3.jpg", "Mary-rem/4.jpg", "Mary-rem/5.jpg",
+      "Mary-rem/6.jpg", "Mary-rem/7.jpg", "Mary-rem/8.jpg", "Mary-rem/9.jpg",
+      "Mary-rem/10.jpg", "Mary-rem/11.jpg", "Mary-rem/12.jpg", "Mary-rem/13.jpg",
+      "Mary-rem/14.jpg", "Mary-rem/16.jpg", "Mary-rem/17.jpg", "Mary-rem/18.jpg",
+      "Mary-rem/19.jpg", "Mary-rem/20.jpg", "Mary-rem/21.jpg", "Mary-rem/22.jpg",
+      "Mary-rem/23.jpg", "Mary-rem/24.jpg", "Mary-rem/25.jpg", "Mary-rem/21.jpg",
+      "Mary-rem/22.jpg", "Mary-rem/23.jpg", "Mary-rem/24.jpg", "Mary-rem/25.jpg",
+      "Mary-rem/26.jpg", "Mary-rem/27.jpg", "Mary-rem/28.jpg", "Mary-rem/29.jpg",
+      "Mary-rem/30.jpg", "Mary-rem/31.jpg", "Mary-rem/32.jpg", "Mary-rem/34.jpg",
     ]
   },
+
   {
     nome: "nanda", tipo: "ensaio", ehAlbum: true,
     capa: "nanda/nanda-capa.jpg",
     imagens: [
-      "nanda/1.jpg",
-      "nanda/2.jpg",
-      
-      "nanda/4.jpg",
-      
-      "nanda/6.jpg",
-      "nanda/7.jpg",
-      "nanda/8.jpg",
-      "nanda/9.jpg",
-      "nanda/10.jpg",
-      "nanda/11.jpg",
-      "nanda/12.jpg",
-      "nanda/13.jpg",
-      "nanda/14.jpg",
-      "nanda/16.jpg",
-      "nanda/17.jpg",
-      "nanda/18.jpg",
-      "nanda/19.jpg",
-      
-      "nanda/21.jpg",
-      "nanda/22.jpg",
-      "nanda/23.jpg",
-      "nanda/24.jpg",
-      "nanda/25.jpg",
-      "nanda/21.jpg",
-      "nanda/22.jpg",
-      "nanda/23.jpg",
-      "nanda/24.jpg",
-      "nanda/25.jpg",
-      "nanda/26.jpg",
-      "nanda/27.jpg",
-      "nanda/28.jpg",
-      "nanda/29.jpg",
-      "nanda/30.jpg",
-      "nanda/31.jpg",
-      "nanda/32.jpg",
-      "nanda/33.jpg",
-      "nanda/34.jpg",
-      "nanda/35.jpg",
-      "nanda/36.jpg",
-      "nanda/37.jpg",
+      "nanda/1.jpg", "nanda/2.jpg", "nanda/4.jpg", "nanda/6.jpg", "nanda/7.jpg",
+      "nanda/8.jpg", "nanda/9.jpg", "nanda/10.jpg", "nanda/11.jpg", "nanda/12.jpg",
+      "nanda/13.jpg", "nanda/14.jpg", "nanda/16.jpg", "nanda/17.jpg", "nanda/18.jpg",
+      "nanda/19.jpg", "nanda/21.jpg", "nanda/22.jpg", "nanda/23.jpg", "nanda/24.jpg",
+      "nanda/25.jpg", "nanda/21.jpg", "nanda/22.jpg", "nanda/23.jpg", "nanda/24.jpg",
+      "nanda/25.jpg", "nanda/26.jpg", "nanda/27.jpg", "nanda/28.jpg", "nanda/29.jpg",
+      "nanda/30.jpg", "nanda/31.jpg", "nanda/32.jpg", "nanda/33.jpg", "nanda/34.jpg",
+      "nanda/35.jpg", "nanda/36.jpg", "nanda/37.jpg",
     ]
   },
+
   {
     nome: "GGXP", tipo: "GGXP", ehAlbum: true,
     capa: "GGXP/GGXP-CAPA.jpg",
     imagens: [
-      "GGXP/1.jpg",
-      "GGXP/2.jpg",
-      "GGXP/3.jpg",
-      "GGXP/4.jpg",
-      "GGXP/5.jpg",
-      "GGXP/6.jpg",
+      "GGXP/1.jpg", "GGXP/2.jpg", "GGXP/3.jpg",
+      "GGXP/4.jpg", "GGXP/5.jpg", "GGXP/6.jpg",
     ]
   },
-{
+
+  {
     nome: "bailegeek", tipo: "bailegeek", ehAlbum: true,
     capa: "bailegeek/bailegeek-CAPA.jpg",
     imagens: [
-      "bailegeek/1.jpg",
-      "bailegeek/2.jpg",
-      "bailegeek/3.jpg",
-      "bailegeek/4.jpg",
-      "bailegeek/5.jpg",
-      "bailegeek/6.jpg",
-      "bailegeek/7.jpg",
-      "bailegeek/8.jpg",
-      "bailegeek/9.jpg",
-      "bailegeek/10.jpg",
-      "bailegeek/11.jpg",
-      "bailegeek/12.jpg",
-      "bailegeek/13.jpg",
-      "bailegeek/14.jpg",
-      "bailegeek/15.jpg",
+      "bailegeek/faixa.jpg", // <<< imagem da faixa, vem primeiro
+      "bailegeek/1.jpg", "bailegeek/2.jpg", "bailegeek/3.jpg", "bailegeek/4.jpg",
+      "bailegeek/5.jpg", "bailegeek/6.jpg", "bailegeek/7.jpg", "bailegeek/8.jpg",
+      "bailegeek/9.jpg", "bailegeek/10.jpg", "bailegeek/11.jpg", "bailegeek/12.jpg",
+      "bailegeek/13.jpg", "bailegeek/14.jpg", "bailegeek/15.jpg",
     ]
-  },
+  }
+];
+
   {
     nome: "MAY", tipo: "ensaio", ehAlbum: true,
     capa: "may/capa-may.jpg",
