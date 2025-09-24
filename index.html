@@ -1,983 +1,259 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <head>
-  <link
-    rel="icon"
-    type="imagem do site/png"
-    href="imagem do site/logo.png"
-  />
-  <title>Paulo Henrique | Fotógrafo</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paulo Henrique Fotógrafo - Galeria</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; transition:0.3s; }
+body { background:#121212; color:#eee; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height:1.6; }
+
+/* Cabeçalho */
+header {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:30px 20px;
+  background:#1b1b1b;
+  box-shadow:0 4px 10px rgba(0,0,0,0.5);
+}
+header .logo img {
+  height:200px;
+  max-width:500%;
+  object-fit:contain;
+  margin-bottom:15px;
+  transition:0.3s;
+}
+nav {
+  display:flex;
+  gap:25px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+nav a {
+  text-decoration:none;
+  font-weight:500;
+  color:#c0392b;
+  font-size:1.05em;
+  transition:0.3s;
+}
+nav a:hover { color:#fff; }
+
+/* Busca */
+.search-container { text-align:center; padding:25px 10px; }
+.search-container input {
+  padding:12px; width:90%; max-width:400px; border-radius:50px;
+  border:2px solid #c0392b; background:#222; color:#fff; font-size:1em;
+}
+.search-container input::placeholder { color:#bbb; }
+
+/* Galeria de pastas */
+.folders { display:flex; flex-wrap:wrap; justify-content:center; gap:25px; padding:30px 10px; }
+.folder {
+  border-radius:15px;
+  width:220px;
+  cursor:pointer;
+  overflow:hidden;
+  text-align:center;
+  transition:0.5s;
+  border:2px solid transparent;
+  background:#1e1e1e;
+  color:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,0.5);
+}
+.folder:hover {
+  transform:translateY(-5px) scale(1.05);
+  border:2px solid #c0392b;
+  box-shadow:0 10px 20px rgba(0,0,0,0.6);
+}
+.folder img { width:100%; height:220px; object-fit:cover; display:block; border-bottom:2px solid #c0392b; }
+.folder span {
+  display:block;
+  padding:15px 10px;
+  font-weight:600;
+  font-size:1.1em;
+  color:#eee;
+  background:linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+}
+
+/* Iframe */
+.iframe-container {
+  position:relative;
+  width:100%;
+  height:calc(100vh - 250px);
+  overflow:hidden;
+  background:#000;
+  border-radius:10px;
+  box-shadow:0 0 20px rgba(0,0,0,0.7);
+  opacity:0;
+  transition:opacity 0.5s ease;
+}
+.iframe-container.show { opacity:1; }
+.iframe-container iframe {
+  width:100%;
+  height:100%;
+  border:none;
+  display:block;
+  background:#000;
+  border-radius:10px;
+}
+
+/* Botão voltar */
+.back {
+  display:block;
+  text-align:center;
+  margin:25px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:1.2em;
+  color:#c0392b;
+}
+
+/* Rodapé */
+footer {
+  text-align:center;
+  padding:25px;
+  color:#c0392b;
+  font-weight:bold;
+  background:#1b1b1b;
+  border-top:2px solid #c0392b;
+  box-shadow:0 -4px 10px rgba(0,0,0,0.5);
+}
+footer a {
+  color:#c0392b;
+  text-decoration:none;
+  margin:0 12px;
+  font-weight:500;
+}
+footer a:hover { color:#fff; }
+
+/* Botão modo claro/escuro */
+#darkModeBtn {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#c0392b;
+  color:#fff;
+  border:none;
+  padding:12px 20px;
+  border-radius:50px;
+  cursor:pointer;
+  font-weight:bold;
+  box-shadow:0 0 15px #900;
+  font-size:1em;
+}
+
+/* Responsividade */
+@media (max-width:768px) {
+  .folder { width:45%; }
+  .folder img { height:180px; }
+  header .logo img { height:100px; }
+  .iframe-container { height:calc(100vh - 200px); }
+}
+@media (max-width:480px) {
+  .folder { width:90%; }
+  .folder img { height:160px; }
+  header .logo img { height:70px; }
+  .iframe-container { height:calc(100vh - 180px); }
+}
+
+/* Modo claro */
+body.light-mode { background:#f5f5f5; color:#111; }
+body.light-mode .folder { background:#fff; color:#111; border:2px solid #c0392b; box-shadow:0 4px 12px rgba(0,0,0,0.3); }
+body.light-mode .folder:hover { box-shadow:0 10px 20px rgba(0,0,0,0.4); }
+body.light-mode .iframe-container { background:#fff; box-shadow:0 0 15px rgba(0,0,0,0.3); }
+body.light-mode footer { background:#c0392b; color:#fff; }
+body.light-mode nav a { color:#c0392b; }
+body.light-mode .search-container input { background:#fff; color:#111; border:2px solid #c0392b; }
+</style>
 </head>
+<body>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Montserrat", sans-serif;
-      }
-
-      body {
-        background-color: #111;
-        color: #fff;
-      }
-
-      body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background-image: url("https://media-hosting.imagekit.io/f5980ccb799b4dac/site.jpg?Expires=1841442184&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=uEZWS6Gk2Ck5pzho2eLfsLV4XsGEltaR0Jn2xhC-w1ibwPNzvCrX-DYf47xZUqnjexq3PuwzVaZIc9V0VZ3Jetsq97h-zRTJPgiDSETEuO~C~hSlu79Qpro4cAzKhfp6OrqtqJIB23p0k1ZcKqS-Rh6w8mv6bk5m2o2q7c8p1y4efODk-opfnZ3fMrsPJm0EabAcU5opSleK0A0tZwf5yUoxBOLLpR8AUQ0P7hFAWcgx6BvqxpSeNbJ7hG7s93B2x8lkEIdyfZEVe1rXZDwBWDXSXQVUgazG-QX85Ue7JQ3vqlR9k1kWDN5k-AHrGSjjhr7Tlv8O81JbRBe95OP7Yg__");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  min-height: 100vh;
-}
-
-
-
-      header img {
-        width: 180px;
-        margin-bottom: 20px;
-      }
-
-      header h1 {
-        font-size: 3rem;
-        font-weight: bold;
-        color: #000; /* preto */
-        text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.6);
-      }
-
-      header p {
-        font-size: 1.2rem;
-        color: #000; /* preto */
-        margin-top: 10px;
-        text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.4);
-      }
-
-      nav {
-        
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        padding: 15px;
-        flex-wrap: wrap;
-      }
-
-      nav a {
-        padding: 10px 18px;
-        color: #fff;
-        text-decoration: none;
-        border: 2px solid #00bcd4;
-        border-radius: 6px;
-        font-weight: bold;
-        background-color: transparent;
-        transition: 0.3s ease;
-      }
-
-      nav a:hover {
-        background-color: #00bcd4;
-        color: #000;
-      }
-
-      .section {
-        padding: 60px 30px;
-        max-width: 1200px;
-        margin: auto;
-      }
-
-      .section h2 {
-        text-align: center;
-        font-size: 2rem;
-        margin-bottom: 40px;
-        color: #00bcd4;
-      }
-
-      .gallery {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 30px;
-      }
-
-      .photo-frame {
-        background: #fff;
-        padding: 10px;
-        border-radius: 5px;
-        box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.5);
-        display: inline-block;
-        transform: rotate(-3deg);
-        transition: 0.4s;
-        max-width: 220px;
-      }
-
-      .photo-frame:nth-child(2) {
-        transform: rotate(2deg);
-      }
-
-      .photo-frame:nth-child(3) {
-        transform: rotate(-1deg);
-      }
-
-      .photo-frame:hover {
-        transform: rotate(0deg) scale(1.03);
-      }
-
-      .photo-frame img {
-        border-radius: 5px;
-        width: 100%;
-        height: auto;
-        display: block;
-      }
-
-      .about,
-      .contact {
-        text-align: center;
-        line-height: 1.8;
-      }
-
-      .btn-downloads {
-        display: block;
-        width: fit-content;
-        margin: 40px auto 0;
-        padding: 12px 25px;
-        background: #00bcd4;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: 0.3s;
-      }
-
-      .btn-downloads:hover {
-        background: #0097a7;
-      }
-
-      footer {
-        background: #000;
-        text-align: center;
-        padding: 20px;
-        color: #777;
-      }
-    </style>
-  </head>
-  <body>
-    <style>
-
-      
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root{
-    --index: calc(1vw + 1vh);
-    --transition: cubic-bezier(.1, .7, 0, 1);
-}
-
-body{
-    background-color: #141414;
-}
-
-.wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-.items{
-    display: flex;
-    gap: 0.4rem;
-    perspective: calc(var(--index) * 35);
-}
-
-.item{
-    width: calc(var(--index) * 3);
-    height: calc(var(--index) * 12);
-    background-color: #222;
-    background-size: cover;
-    background-position: center;
-    cursor: pointer;
-    filter: grayscale(1) brightness(.5);
-    transition: transform 1.25s var(--transition), filter 3s var(--transition), width 1.25s var(--transition);
-    will-change: transform, filter, rotateY, width;
-}
-
-.item::before, .item::after{
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 20px;
-    right: calc(var(--index) * -1);
-}
-
-.item::after{
-    left: calc(var(--index) * -1);
-}
-
-.items .item:hover{
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 10));
-}
-
-/*Right*/
-
-.items .item:hover + *{
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 8.5)) rotateY(35deg);
-    z-index: -1;
-}
-
-.items .item:hover + * + *{
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 5.6)) rotateY(40deg);
-    z-index: -2;
-}
-
-.items .item:hover + * + * + *{
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 2.5)) rotateY(30deg);
-    z-index: -3;
-}
-
-.items .item:hover + * + * + * + *{
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * .6)) rotateY(15deg);
-    z-index: -4;
-}
-
-
-/*Left*/
-
-.items .item:has( + :hover){
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 8.5)) rotateY(-35deg);
-}
-
-.items .item:has( + * + :hover){
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 5.6)) rotateY(-40deg);
-}
-
-.items .item:has( + * + * + :hover){
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 2.5)) rotateY(-30deg);
-}
-
-.items .item:has( + * + * + * + :hover){
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * .6)) rotateY(-15deg);
-}
-
-.items .item:active, .items .item:focus {
-	width: 28vw;
-	filter: inherit;
-	z-index: 100;
-	transform: translateZ(calc(var(--index) * 10));
-    margin: 0 .45vw;
-}
-
-      header {
-        text-align: center;
-        padding-top: 0;
-        margin-top: 0;
-      }
-
-      header img {
-        width: 500px;
-        height: auto;
-        margin-top: 0;
-        padding-top: 0;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      header h1,
-      header p {
-        margin: 5px 0;
-      }
-
-
-      
-    </style>
-
-    <header style="
-  width: 100%;
-  height: 400px;
-  background-image: url('imagem do site/banner.png');
-  background-repeat: no-repeat;
-  background-size: contain;  /* ou use 'cover' para preencher tudo */
-  background-position: center;
-  text-align: center;
-">
+<header>
+  <div class="logo">
+    <img src="https://i.ibb.co/NgZnfYZb/logo-branca.png" alt="Paulo Henrique Fotógrafo">
+  </div>
+  <nav>
+    <a href="mailto:paulo.henrique72681@gmail.com">Email</a>
+    <a href="https://wa.me/38991034781" target="_blank">WhatsApp</a>
+    <a href="https://www.instagram.com/paulo_henrique_fotografo/?next=%2F" target="_blank">Instagram</a>
+  
+  </nav>
 </header>
 
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="Busque uma pasta pelo nome..." onkeyup="filterFolders()">
+</div>
 
+<h2 style="text-align:center; margin:20px 0; color:#c0392b;">Galeria</h2>
 
-
-
-
-    <style>
-
-
-      
-  nav {
-    
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 400px;
-    width: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .menu-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 10px;
-    z-index: 2;
-  }
-
-  nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: clamp(12px, 2.5vw, 18px);
-    padding: 10px 20px;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 8px;
-    white-space: nowrap;
-    text-align: center;
-    border: 2px solid red;
-    transition: all 0.3s ease;
-  }
-
-  nav a.area-clientes {
-    padding: 12px 28px;
-    font-size: clamp(14px, 3vw, 20px);
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-
-  nav a:hover {
-    transform: scale(1.05);
-    background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 10px red;
-    color: #ff4d4d;
-  }
-
-  @media (max-width: 600px) {
-    .menu-container {
-      gap: 8px;
-    }
-
-    nav a {
-      font-size: clamp(10px, 4vw, 14px);
-      padding: 6px 12px;
-    }
-
-    nav a.area-clientes {
-      padding: 8px 20px;
-      font-size: clamp(12px, 4vw, 16px);
-    }
-  }
-
-  
-
-  @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  min-height: 100vh;
-  background: transparent;
-  font-family: "Ubuntu Mono", monospace;
-  font-weight: 400;
-}
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  padding: 40px 20px;
-  background: transparent;
-}
-
-.items {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  background: transparent;
-}
-
-.item {
-  width: 200px;
-  height: 150px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s;
-  background-color: transparent;
-}
-
-.item:hover {
-  transform: scale(1.05);
-}
-
-
-    </div>
-  
-
-  
-</style>
-
-
-
-<nav>
-  <div class="menu-container">
-    <a href="#portfolio">Portfólio</a>
-    <a href="#sobre">Sobre</a>
-    <a href="#contato">Contato</a>
-    <a href="downloads.html" class="area-clientes">Área de Clientes</a>
+<div id="foldersPage" class="folders">
+  <!-- Pastas com imagem de capa -->
+  <div class="folder" data-name="animon" onclick="openFolder('https://drive.google.com/embeddedfolderview?id=1dm9Ro_wJM_EzKhAgBqY_Wgb0aVIDcZDf#grid')">
+    <img src="capas/ponto1.jpg" alt="animon">
+    <span>animon 2025</span>
   </div>
-</nav>
-
-<section class="section" id="portfolio">
-  <h2 style="color: red; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);">Portfólio</h2>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500&display=swap');
-
-    .section {
-      padding: 40px;
-      text-align: center;
-      font-family: 'Nunito', sans-serif;
-    }
-
-    .cards-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: flex-end;
-      gap: 40px;
-      margin-top: 40px;
-      position: relative;
-      z-index: 0;
-    }
-
-    .card {
-      width: 250px;
-      height: 350px;
-      background-size: cover;
-      background-position: center;
-      border-radius: 10px;
-      position: relative;
-      cursor: pointer;
-      border: 1px solid white;
-      overflow: visible; /* permite que a imagem ultrapasse */
-      transition: 0.3s;
-      perspective: 1000px;
-    }
-
-    .card h1 {
-      position: absolute;
-      bottom: 15px;
-      width: 100%;
-      text-align: center;
-      color: white;
-      font-size: 22px;
-      transition: 0.5s;
-      z-index: 2;
-    }
-
-    .hover-image {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -60%) scale(1.2);
-      opacity: 0;
-      width: 300px;
-      height: 300px;
-      background-position: center;
-      background-size: contain;
-      background-repeat: no-repeat;
-      transition: 0.6s;
-      z-index: 100; /* muito alto para sair do card */
-      pointer-events: none;
-      filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.5));
-    }
-
-    .card:hover h1 {
-      font-size: 26px;
-      text-shadow: 0px 0px 10px white, 0px 0px 20px white;
-    }
-
-    .card:hover .hover-image {
-      top: -60px; /* sobe a imagem pra fora do card */
-      opacity: 1;
-      transform: translate(-50%, 0%) scale(1.4);
-    }
-
-    .card:hover {
-      background-blend-mode: darken;
-      background-color: rgba(0, 0, 0, 0.6);
-    }
-  </style>
-
-  <div class="cards-container">
-    <div class="card" style="background-image: url('https://ik.imagekit.io/5jhw4etb5/IMG_6953.JPG?updatedAt=1747419793787');">
-      <h1>Cosplay REM</h1>
-      <div class="hover-image" style="background-image: url('https://ik.imagekit.io/5jhw4etb5/1.png?updatedAt=1747419795568');"></div>
-    </div>
-
-     <div class="card" style="background-image: url('https://ik.imagekit.io/ys8l6suo53/5.jpg');">
-      <h1>DUNA</h1>
-      <div class="hover-image" style="background-image: url('https://ik.imagekit.io/ys8l6suo53/duna.png');"></div>
-    </div>
-
-    <div class="card" style="background-image: url('https://ik.imagekit.io/5jhw4etb5/IMG_6512.jpg?updatedAt=1747411132215');">
-      <h1>Cosplay 2B</h1>
-      <div class="hover-image" style="background-image: url('https://ik.imagekit.io/5jhw4etb5/3.png?updatedAt=1747410746997');"></div>
-    </div>
-    
+  <div class="folder" data-name="bailegeek" onclick="openFolder('https://drive.google.com/embeddedfolderview?id=1DTdM2aDSnEd3PmEiOKIuABNPhJKDu_lS#grid')">
+    <img src="capas/pronto2.jpg" alt="bailegeek">
+    <span>bailegeek 2025</span>
   </div>
-</section>
-
-
-
-
-
-
-
- 
+  <div class="folder" data-name="Pronto" onclick="openFolder('https://drive.google.com/embeddedfolderview?id=1xnVHVXXZUSwHqMljyuzAhgdXEEwWYr0S#grid')">
+    <img src="capas/pronto3.jpg" alt="Pronto">
+    <span>Geovanna</span>
+  </div>
+  <div class="folder" data-name="Pronto" onclick="openFolder('https://drive.google.com/embeddedfolderview?id=1ZGBxZ60PFPnJwrkSL8bhvGm24ScL11cz#grid')">
+    <img src="capas/pronto3.jpg" alt="Pronto">
+    <span>mel_ketley</span>
   </div>
 </div>
 
-      <div class="gallery" id="gallery"></div>
-
-<script>
-  const imagens = [
-    "11.jpg",
-    "12.jpg",
-    "13.jpg",
-    "14.jpg",
-    "15.jpg"
-  ];
-
-  const baseURL = "imagem/"; // pasta local onde estão as fotos
-
-  const gallery = document.getElementById("gallery");
-
-  imagens.forEach((nome) => {
-    const div = document.createElement("div");
-    div.className = "photo-frame";
-    div.innerHTML = `<img src="${baseURL}${encodeURIComponent(nome)}" alt="Foto" />`;
-    gallery.appendChild(div);
-  });
-</script>
-
-
-     </div>
-<style>
-  .btn-downloads {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #e63946; /* Vermelho bonito */
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .btn-downloads:hover {
-    background-color: #d62828; /* Vermelho mais escuro no hover */
-    transform: scale(1.05);
-  }
-
-  .centralizar-botao {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 20vh; /* Centraliza verticalmente ocupando 100% da altura da tela */
-  }
-</style>
-</head>
-
-<body>
-  <div class="centralizar-botao">
-    <a class="btn-downloads" href="downloads.html">📸 Acessar Fotos dos Eventos</a>
-  </div>
-</body>
-
-    </section>
-
-
-
- <style>
-  
-    nav {
-  background-image: url('imagem do site/faixa.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 400px;
-  width: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-    .section {
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 2em;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 1.2em;
-      line-height: 1.5;
-    }
-  </style>
-
-<body>
-
-  <nav></nav>
-
-  <section class="section about" id="sobre">
-    <h2 style="color: red; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);">Sobre Mim</h2>
-
-    <style>
-    .container {
-      display: flex;
-      align-items: center;
-      margin: 20px;
-    }
-
-    .foto {
-      width: 150px; /* Ajuste o tamanho conforme necessário */
-      height: auto;
-      margin-right: 20px; /* Espaço entre a imagem e o texto */
-    }
-
-    p {
-      font-size: 16px;
-      line-height: 1.5;
-      margin: 0;
-      color: black; /* Texto em preto */
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <img src="imagem do site/fotografo.png" alt="Foto do fotógrafo" class="foto">
-    <p>
-      Fotógrafo apaixonado há mais de 10 anos, capturo momentos reais com
-      emoção e criatividade.<br />
-      Atendo casamentos, aniversários, editoriais e sessões pessoais.
-    </p>
-  </div>
-</body>
-
-
-  </section>
-
-    <section class="section contact" id="contato">
-      <h2 style="color: red; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);">Contato</h2>
-      <p>
-        📧 paulo.henrique72681@gmail.com<br />
-        📞 (38) 99103-4781<br />
-        📍 montes-claros - MG
-      </p>
-    </section>
-    
-    <!-- Botões de Redes Sociais com Fundo Transparente e Efeito -->
-<div class="social-buttons">
-  <a href="https://www.instagram.com/paulo_fotografo28/" target="_blank" class="social-icon instagram" title="Instagram"></a>
-  <a href="https://wa.me/5538991034781" target="_blank" class="social-icon whatsapp" title="WhatsApp"></a>
-  <a href="https://www.facebook.com/profile.php?id=61561469927137&sk=photos" target="_blank" class="social-icon facebook" title="Facebook"></a>
+<div id="iframeContainer" class="iframe-container">
+  <iframe id="folderFrame"></iframe>
 </div>
 
-<style>
-  .social-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-  }
+<span id="backButton" class="back" style="display:none;" onclick="showFolders()">← Voltar</span>
 
-  .social-icon {
-    width: 80px;
-    height: 80px;
-    background-color: transparent;
-    background-size: 60%;
-    background-repeat: no-repeat;
-    background-position: center;
-    border: 2px solid white;
-    border-radius: 16px;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    cursor: pointer;
-  }
+<footer>
+  <span>Entre em contato:</span>
+  <a href="mailto:seuemail@exemplo.com">Email</a> |
+  <a href="https://wa.me/5511999999999" target="_blank">WhatsApp</a> |
+  <a href="https://instagram.com/seuusuario" target="_blank">Instagram</a>
+</footer>
 
-  .social-icon:hover {
-    transform: scale(0.85) rotate(-10deg);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-  }
-
-  .instagram {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/174/174855.png');
-  }
-
-  .whatsapp {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/733/733585.png');
-  }
-
-  .facebook {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/733/733547.png');
-  }
-</style>
-
-
-    <footer>&copy; 2025 Paulo henrique | fotógrafo
-      
-    </footer>
+<button id="darkModeBtn" onclick="toggleMode()">Alternar Tema</button>
 
 <script>
-function iniciarJogoFotografia() {
-  document.body.innerHTML = `
-    <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-        font-family: 'Courier New', monospace;
-        background: linear-gradient(to top, #8fd19e 0%, #87ceeb 50%);
-        position: relative;
-        cursor: none;
-      }
+const folderFrame = document.getElementById('folderFrame');
+const iframeContainer = document.getElementById('iframeContainer');
+const backButton = document.getElementById('backButton');
 
-      .nuvem {
-        position: absolute;
-        width: 120px;
-        height: 60px;
-        background: #fff;
-        border-radius: 60px;
-        top: 50px;
-        left: 100px;
-        box-shadow: 40px 0 #fff, 80px 0 #fff;
-        opacity: 0.8;
-        animation: moverNuvem 60s linear infinite;
-      }
-
-      @keyframes moverNuvem {
-        0% { left: -200px; }
-        100% { left: 110%; }
-      }
-
-      .grama {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 150px;
-        background: linear-gradient(to top, #2f8f46 0%, #48b56a 100%);
-        border-top-left-radius: 100% 20%;
-        border-top-right-radius: 100% 20%;
-      }
-
-      .passaro {
-        position: absolute;
-        width: 40px;
-        height: 20px;
-        background: none;
-        animation: baterAsas 1s infinite alternate;
-      }
-
-      .passaro::before {
-        content: '';
-        position: absolute;
-        width: 40px;
-        height: 20px;
-        background: radial-gradient(ellipse at center, #444 40%, transparent 60%);
-        border-radius: 50% 50% 50% 50%;
-      }
-
-      @keyframes baterAsas {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(-10px); }
-      }
-
-      #pontuacao {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background: rgba(255,255,255,0.9);
-        padding: 10px 15px;
-        border-radius: 10px;
-        font-size: 16px;
-        z-index: 10;
-        color: black;
-        font-weight: bold;
-      }
-
-      #camera {
-        position: fixed;
-        width: 60px;
-        height: 40px;
-        background: #333;
-        border: 3px solid #000;
-        border-radius: 4px;
-        pointer-events: none;
-        z-index: 1000;
-      }
-
-      #camera::before {
-        content: '';
-        position: absolute;
-        top: 8px;
-        left: 10px;
-        width: 20px;
-        height: 20px;
-        background: #111;
-        border-radius: 50%;
-        border: 2px solid #aaa;
-      }
-
-      #flash {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: white;
-        opacity: 0;
-        pointer-events: none;
-        z-index: 999;
-        transition: opacity 0.2s;
-      }
-    </style>
-
-    <div id="pontuacao">📸 Fotos tiradas: <span id="pontos">0</span></div>
-    <div class="nuvem" style="top:40px;"></div>
-    <div class="nuvem" style="top:100px; left:300px; animation-delay:10s;"></div>
-    <div class="nuvem" style="top:70px; left:600px; animation-delay:20s;"></div>
-    <div class="grama"></div>
-    <div id="camera"></div>
-    <div id="flash"></div>
-  `;
-
-  const flash = document.getElementById("flash");
-  const camera = document.getElementById("camera");
-  let pontos = 0;
-
-  document.addEventListener("mousemove", (e) => {
-    camera.style.left = `${e.clientX - 30}px`;
-    camera.style.top = `${e.clientY - 20}px`;
-  });
-
-  function mostrarFlash() {
-    flash.style.opacity = 1;
-    setTimeout(() => flash.style.opacity = 0, 100);
-  }
-
-  function atualizarPontuacao() {
-    document.getElementById("pontos").innerText = pontos;
-  }
-
-  function criarPassaro() {
-    const passaro = document.createElement("div");
-    passaro.className = "passaro";
-    document.body.appendChild(passaro);
-
-    let x = -50;
-    const y = Math.random() * (window.innerHeight - 250) + 50;
-    passaro.style.top = `${y}px`;
-    passaro.style.left = `${x}px`;
-
-    const mover = setInterval(() => {
-      x += 2 + pontos * 0.1;
-      if (x > window.innerWidth + 50) {
-        clearInterval(mover);
-        passaro.remove();
-      } else {
-        passaro.style.left = `${x}px`;
-      }
-    }, 20);
-
-    passaro.addEventListener("click", (e) => {
-      e.stopPropagation();
-      pontos++;
-      atualizarPontuacao();
-      mostrarFlash();
-      passaro.remove();
-      clearInterval(mover);
-    });
-  }
-
-  setInterval(criarPassaro, 1500);
-
-  atualizarPontuacao();
+function openFolder(url) {
+  folderFrame.src = url;
+  iframeContainer.classList.add('show');
+  backButton.style.display = 'block';
+  document.getElementById('foldersPage').style.display = 'none';
+  document.querySelector('.search-container').style.display = 'none';
 }
 
-window.addEventListener('offline', () => {
-  iniciarJogoFotografia();
-});
+function showFolders() {
+  folderFrame.src = '';
+  iframeContainer.classList.remove('show');
+  backButton.style.display = 'none';
+  document.getElementById('foldersPage').style.display = 'flex';
+  document.querySelector('.search-container').style.display = 'block';
+}
+
+function filterFolders() {
+  const input = document.getElementById('searchInput').value.toLowerCase();
+  document.querySelectorAll('.folder').forEach(folder => {
+    const name = folder.getAttribute('data-name').toLowerCase();
+    folder.style.display = name.includes(input) ? 'block' : 'none';
+  });
+}
+
+function toggleMode() { document.body.classList.toggle('light-mode'); }
 </script>
 
-<script>
-   
-  // Chnage folder and framecount here 
-  const folder = "cursor7";  
-  const frameCount = 3; 
-  
-  const frames = [];
-
-  for (let i = 1; i <= frameCount; i++) {
-    frames.push(`${folder}/frame${i}.png`);
-  }
-
-  let index = 0;
-  const fps = 10;
-
-  setInterval(() => {
-    document.body.style.cursor =
-     `url(${frames[index]}), auto`;
-    index = (index + 1) % frames.length;
-  }, 2000 / fps);
-</script>
-
-	
-  </body>
+</body>
 </html>
